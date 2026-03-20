@@ -10,64 +10,123 @@ body{
   font-family: Arial;
   background:#0d1117;
   color:white;
-  text-align:center;
-  padding:40px;
+  margin:0;
 }
-.container{
-  max-width:800px;
-  margin:auto;
-}
-.card{
+nav{
+  padding:15px;
   background:#161b22;
-  padding:30px;
-  margin:20px;
-  border-radius:15px;
+  text-align:center;
 }
-button{
-  padding:12px 25px;
+nav button{
+  margin:5px;
+  padding:10px 20px;
   border:none;
-  border-radius:10px;
+  border-radius:8px;
   background:#2563eb;
   color:white;
   cursor:pointer;
-  font-size:16px;
 }
-button:hover{
-  background:#1d4ed8;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+  text-align:center;
+}
+.card{
+  background:#161b22;
+  padding:20px;
+  margin:15px;
+  border-radius:12px;
+}
+button.pay{
+  padding:10px 20px;
+  border:none;
+  border-radius:8px;
+  background:#06b6d4;
+  color:white;
+  cursor:pointer;
+}
+.page{display:none;}
+.page.active{display:block;}
+img{
+  width:150px;
+  background:white;
+  padding:10px;
+  border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<nav>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('payment')">Payment</button>
+</nav>
 
-<h1>⚡ SmartPay Plug</h1>
-<p>Select your power plan</p>
+<!-- HOME PAGE (QR) -->
+<div id="home" class="page active">
+  <div class="container">
+    <h1>Scan & Pay</h1>
 
-<div class="card">
-  <h2>Quick Charge</h2>
-  <p>₹10 • Short Usage</p>
-  <button onclick="pay()">Pay ₹10</button>
+    <div class="card">
+      <h3>₹10 Payment</h3>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rzp.io/rzp/TnMYczJv">
+    </div>
+
+    <div class="card">
+      <h3>₹20 Payment</h3>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rzp.io/rzp/8uOKYlB5">
+    </div>
+
+    <div class="card">
+      <h3>₹50 Payment</h3>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://rzp.io/rzp/02Y4FFy0">
+    </div>
+
+  </div>
 </div>
 
-<div class="card">
-  <h2>Standard Charge</h2>
-  <p>₹20 • Medium Usage</p>
-  <button onclick="pay()">Pay ₹20</button>
-</div>
+<!-- PAYMENT PAGE (BUTTONS) -->
+<div id="payment" class="page">
+  <div class="container">
+    <h1>Select Plan</h1>
 
-<div class="card">
-  <h2>Extended Charge</h2>
-  <p>₹50 • Long Usage</p>
-  <button onclick="pay()">Pay ₹50</button>
-</div>
+    <div class="card">
+      <h3>Quick Charge ₹10</h3>
+      <button class="pay" onclick="pay(10)">Pay</button>
+    </div>
 
+    <div class="card">
+      <h3>Standard Charge ₹20</h3>
+      <button class="pay" onclick="pay(20)">Pay</button>
+    </div>
+
+    <div class="card">
+      <h3>Extended Charge ₹50</h3>
+      <button class="pay" onclick="pay(50)">Pay</button>
+    </div>
+
+  </div>
 </div>
 
 <script>
-function pay(){
-  window.location.href = "https://rzp.io/rzp/TnMYczJv";
+function showPage(page){
+  document.getElementById('home').classList.remove('active');
+  document.getElementById('payment').classList.remove('active');
+  document.getElementById(page).classList.add('active');
+}
+
+function pay(amount){
+  if(amount === 10){
+    window.location.href = "https://rzp.io/rzp/TnMYczJv";
+  } 
+  else if(amount === 20){
+    window.location.href = "https://rzp.io/rzp/8uOKYlB5";
+  } 
+  else if(amount === 50){
+    window.location.href = "https://rzp.io/rzp/02Y4FFy0";
+  }
 }
 </script>
 
